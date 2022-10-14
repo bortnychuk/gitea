@@ -7,7 +7,7 @@ pipeline {
         stages {
         stage('Cloning git reposiry') {
             steps {
-                git branch: 'release/v1.17', url: 'git@github.com:bortnychuk/gitea.git'
+                git branch: 'release/v1.16', url: 'git@github.com:bortnychuk/gitea.git'
             }
         }
         stage('Configuring Go, nodejs and build-essential') {
