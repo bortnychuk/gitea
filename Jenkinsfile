@@ -7,7 +7,7 @@ pipeline {
         stages {
         stage('Cloning git reposiry') {
             steps {
-                git branch: 'release/v1.17', url: 'git@github.com:bortnychuk/gitea.git'
+                git branch: 'v1.17.1', url: 'git@github.com:bortnychuk/gitea.git'
             }
         }
         stage('Configuring Go, nodejs and build-essential') {
@@ -17,7 +17,7 @@ pipeline {
                 sh 'sudo apt install make'
                 sh 'sudo apt-get install build-essential'
                 sh 'sudo go install github.com/google/go-licenses@latest'
-                sh 'ls -lф'
+                sh 'ls -la'
             }
         }
         stage('Building Gitea application') {
