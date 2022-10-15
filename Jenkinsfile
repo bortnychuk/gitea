@@ -20,6 +20,11 @@ pipeline {
                 sh 'ls -l'
             }
         }
+        stage('Formating code') {
+            steps {
+                sh 'make fmt'
+            }
+        }
         stage('Building Gitea application') {
             steps {
                 sh 'TAGS="bindata sqlite sqlite_unlock_notify" make build'
@@ -30,7 +35,7 @@ pipeline {
                 sh 'TAGS="bindata sqlite sqlite_unlock_notify" make test'
             }
         }
-        stage('Publish to Test Server') {
+        stage('Publishing and runinig Gitea on Test Server') {
             steps {
                 sshPublisher(publishers: [sshPublisherDesc(configName: 'MyGiteaServer', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'sudo systemctl start gitea', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/tmp/gitEA', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '*')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
