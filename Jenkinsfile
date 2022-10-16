@@ -40,5 +40,10 @@ pipeline {
                 sshPublisher(publishers: [sshPublisherDesc(configName: 'MyGiteaServer', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'sudo systemctl start gitea', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/usr/gitEA', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '*')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
         }
+        stage('Checking connection with Gitea test') {
+            steps {
+                sh 'curl -I --http2 -s 192.168.1.34:3000 | grep HTTP'
+            }
+        }
     }        
 }
