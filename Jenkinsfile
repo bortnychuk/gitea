@@ -42,6 +42,7 @@ pipeline {
         }
         stage('Checking connection with Gitea test') {
             steps {
+                sh 'sleep 10'
                 sh 'curl -I --http2 -s 192.168.1.34:3000 | grep HTTP'
             }
         }
